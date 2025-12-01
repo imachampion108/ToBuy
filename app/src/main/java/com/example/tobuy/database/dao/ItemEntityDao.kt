@@ -9,13 +9,13 @@ import com.example.tobuy.database.entity.ItemEntity
 @Dao
 interface ItemEntityDao {
 
-    @Query("SELECT * FROM itemEntity")
+    @Query("SELECT * FROM item_entity")
     fun getAll(): List<ItemEntity>
 
     @Insert
-    fun getAll(vararg items : ItemEntity)
+    fun insert(items : ItemEntity)
 
     @Delete
-    fun delete(itmes : ItemEntity)
+    fun delete(items: ItemEntity)
 
 }
