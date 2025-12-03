@@ -10,6 +10,9 @@ android {
     namespace = "com.example.tobuy"
     compileSdk = 36
 
+    buildFeatures {
+        viewBinding = true
+    }
     defaultConfig {
         applicationId = "com.example.tobuy"
         minSdk = 24
