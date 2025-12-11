@@ -2,10 +2,13 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.devtools.ksp")
+    kotlin("kapt")
 
 
 }
-
+kapt{
+    correctErrorTypes = true
+}
 android {
     namespace = "com.example.tobuy"
     compileSdk = 36
@@ -48,6 +51,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.filament.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -61,4 +65,12 @@ dependencies {
     val nav_version = "2.9.6"
     implementation("androidx.navigation:navigation-fragment:${nav_version}")
     implementation("androidx.navigation:navigation-ui:${nav_version}")
+
+    kapt ("androidx.room:room-compiler:$room_version")
+
+    val epoxyVersion = "4.4.1"
+    implementation ("com.airbnb.android:epoxy:$epoxyVersion")
+    kapt("com.airbnb.android:epoxy-processor:$epoxyVersion")
+
+
 }
