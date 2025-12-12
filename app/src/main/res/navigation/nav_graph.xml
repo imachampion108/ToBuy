@@ -9,6 +9,18 @@
         android:id="@+id/homeFragment"
         android:name="com.example.tobuy.ui.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/homeFragment_to_AddItemEntity"
+            app:destination="@id/AddItemEntity"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/AddItemEntity"
+        android:name="com.example.tobuy.ui.AddItemEntityFragment"
+        android:label="Add"
+        tools:layout="@layout/fragment_add_item_entity"
         />
 </navigation>

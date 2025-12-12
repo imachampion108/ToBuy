@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.tobuy.R
 import com.example.tobuy.databinding.FragmentHomeBinding
 import java.util.zip.Inflater
 
@@ -23,6 +24,10 @@ class HomeFragment : BaseFragment() {
 
       override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
+
+            binding.fab.setOnClickListener {
+                  navigateViaGraph(R.id.homeFragment_to_AddItemEntity)
+            }
             sharedViewModel2.itemsLiveData.observe(viewLifecycleOwner){
                   itemEntities ->
             }

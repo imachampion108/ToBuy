@@ -8,7 +8,7 @@ import com.example.tobuy.database.entity.ItemEntity
 import com.example.tobuy.databinding.ModelItemEntityBinding
 
 class HomeEpoxyController(private val itemEntityInterface: itemEntityInterface) : EpoxyController() {
-    var isLoading : Boolean = false
+    var isLoading : Boolean = true
         set(value){
             field = value
             if (field) {

@@ -18,5 +18,13 @@ import com.example.tobuy.database.AppDatabase
 
      protected val sharedViewModel : ToBuyViewModel by viewModels()
      protected val sharedViewModel2 : ToBuyViewModel by activityViewModels()
+
+     protected fun navigateUp(){
+         mainActivity.navController.navigateUp()
+     }
+
+     protected fun navigateViaGraph(actionId : Int){
+         mainActivity.navController.navigate(actionId)
+     }
 }
 
