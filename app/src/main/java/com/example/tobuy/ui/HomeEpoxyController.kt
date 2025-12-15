@@ -26,6 +26,8 @@ class HomeEpoxyController(private val itemEntityInterface: itemEntityInterface) 
     override fun buildModels() {
         if (isLoading) {
             // loading state
+            // todo loading state
+            LoadingEpoxyModel().id("loading_state").addTo(this)
         return
         }
         if (itemEntityList.isEmpty()){

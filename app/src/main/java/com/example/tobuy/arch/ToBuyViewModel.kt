@@ -21,10 +21,12 @@ class ToBuyViewModel : ViewModel() {
             itemsLiveData.postValue(items)
         }
     }
-    fun insertItem(itemEntity: ItemEntity){
-        repository.insertItem(itemEntity)
+      fun insertItem(itemEntity: ItemEntity){
+       viewModelScope.launch {
+           repository.insertItem(itemEntity)
+       }
     }
-    fun deleteItem(itemEntity: ItemEntity){
-        repository.deleteItem(itemEntity)
+     fun deleteItem(itemEntity: ItemEntity){
+        viewModelScope.launch {  repository.deleteItem(itemEntity)
     }
-}
+}}
