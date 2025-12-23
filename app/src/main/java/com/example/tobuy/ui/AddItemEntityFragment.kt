@@ -9,6 +9,7 @@ import com.example.tobuy.R
 import com.example.tobuy.database.entity.ItemEntity
 import com.example.tobuy.databinding.FragmentAddItemEntityBinding
 import java.util.UUID
+import java.util.zip.Inflater
 
 class AddItemEntityFragment() : BaseFragment() {
     var _binding: FragmentAddItemEntityBinding? = null
@@ -19,9 +20,8 @@ class AddItemEntityFragment() : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAddItemEntityBinding.inflate(layoutInflater, container, false)
-        val view = binding.root
-        return view
+        _binding = FragmentAddItemEntityBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

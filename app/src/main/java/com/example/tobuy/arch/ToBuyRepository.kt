@@ -6,14 +6,14 @@ import com.example.tobuy.database.entity.ItemEntity
 class ToBuyRepository (private val appDatabase: AppDatabase) {
 
     suspend fun insertItem(itemEntity: ItemEntity){
-        appDatabase.ItemEntityDao().insert(itemEntity)
+        appDatabase.itemEntityDao().insert(itemEntity)
     }
 
     suspend fun deleteItem(itemEntity: ItemEntity){
-        appDatabase.ItemEntityDao().delete(itemEntity)
+        appDatabase.itemEntityDao().delete(itemEntity)
     }
 
     suspend fun getItemList() : List<ItemEntity>{
-        return appDatabase.ItemEntityDao().getAll()
+        return appDatabase.itemEntityDao().getAll()
     }
 }

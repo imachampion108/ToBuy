@@ -1,4 +1,5 @@
 package com.example.tobuy.ui
+import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.example.tobuy.R
@@ -20,7 +21,7 @@ class HomeEpoxyController(private val itemEntityInterface: itemEntityInterface) 
         set(value) {
             field = value
             isLoading = false
-                requestModelBuild()
+            requestModelBuild()
         }
 
     override fun buildModels() {
@@ -59,5 +60,12 @@ class HomeEpoxyController(private val itemEntityInterface: itemEntityInterface) 
             priorityTextView.setOnClickListener {
                 itemEntityInterface.onBumpPriority(itemEntity)
             }
+            val colorRes = when(itemEntity.priority){
+                1 -> android.R.color.holo_green_dark
+                2 -> android.R.color.holo_orange_dark
+                3 -> android.R.color.holo_red_dark
+                else -> android.R.color.holo_purple
+            }
+            priorityTextView.setBackgroundColor(ContextCompat.getColor(root.context,colorRes))
         } }
 }

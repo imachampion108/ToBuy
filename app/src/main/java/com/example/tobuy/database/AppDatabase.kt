@@ -15,13 +15,13 @@ abstract class AppDatabase : RoomDatabase(){
 
         fun getDatabase(context: Context) : AppDatabase {
             if (appDatabase != null) {
-                return appDatabase!!
+            return appDatabase!!
             }
 
             appDatabase = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java,"to-buy-database").build()
             return appDatabase!!
         }
     }
-    abstract fun ItemEntityDao() : ItemEntityDao
+    abstract fun itemEntityDao() : ItemEntityDao
 
 }

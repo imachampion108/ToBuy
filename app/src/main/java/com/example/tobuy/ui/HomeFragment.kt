@@ -10,7 +10,7 @@ import com.example.tobuy.databinding.FragmentHomeBinding
 import java.util.zip.Inflater
 
 class HomeFragment : BaseFragment(), itemEntityInterface {
-      var _binding : FragmentHomeBinding? = null
+      var _binding: FragmentHomeBinding? = null
       val binding get() = _binding!!
 
       override fun onCreateView(
@@ -18,9 +18,8 @@ class HomeFragment : BaseFragment(), itemEntityInterface {
             container: ViewGroup?,
             savedInstanceState: Bundle?
       ): View? {
-            _binding = FragmentHomeBinding.inflate(inflater,container,false)
-            val view = binding.root
-            return view
+            _binding = FragmentHomeBinding.inflate(inflater, container, false)
+            return binding.root
       }
 
       override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,16 +29,12 @@ class HomeFragment : BaseFragment(), itemEntityInterface {
                   navigateViaGraph(R.id.homeFragment_to_AddItemEntity)
             }
             val controller = HomeEpoxyController(this)
-             binding.epoxyRecyclerView.setController(controller)
-            sharedViewModel2.itemsLiveData.observe(viewLifecycleOwner){
-                  itemEntities -> controller.itemEntityList = itemEntities as ArrayList<ItemEntity>
+            binding.epoxyRecyclerView.setController(controller)
+            sharedViewModel.itemsLiveData.observe(viewLifecycleOwner) { itemEntities ->
+                  controller.itemEntityList = itemEntities as ArrayList<ItemEntity>
             }
       }
 
-      override fun onDestroyView() {
-            super.onDestroyView()
-            _binding = null
-      }
 
       override fun onDeleteItemEntity(itemEntity: ItemEntity) {
             TODO("Not yet implemented")
@@ -47,5 +42,10 @@ class HomeFragment : BaseFragment(), itemEntityInterface {
 
       override fun onBumpPriority(itemEntity: ItemEntity) {
             TODO("Not yet implemented")
+      }
+
+      override fun onDestroyView() {
+            super.onDestroyView()
+            _binding = null
       }
 }

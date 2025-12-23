@@ -16,8 +16,8 @@ import com.example.tobuy.database.AppDatabase
     protected val appDatabase : AppDatabase
         get() = AppDatabase.getDatabase(requireActivity())
 
-     protected val sharedViewModel : ToBuyViewModel by viewModels()
-     protected val sharedViewModel2 : ToBuyViewModel by activityViewModels()
+     //protected val sharedViewModel : ToBuyViewModel by viewModels()
+     protected val sharedViewModel : ToBuyViewModel by activityViewModels()
 
      protected fun navigateUp(){
          mainActivity.navController.navigateUp()

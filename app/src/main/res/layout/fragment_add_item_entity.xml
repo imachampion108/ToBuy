@@ -88,7 +88,7 @@
             android:layout_marginEnd="16dp"
             android:text="Save"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/RadioGroup"
+            app:layout_constraintTop_toBottomOf="@id/RadioGroup"
             />
          </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -15,7 +15,6 @@ class ToBuyViewModel : ViewModel() {
     fun init(appDatabase: AppDatabase ) {
         repository = ToBuyRepository(appDatabase)
 
-
         viewModelScope.launch {
             val items = repository.getItemList()
             itemsLiveData.postValue(items)
