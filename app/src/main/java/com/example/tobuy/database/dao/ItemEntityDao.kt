@@ -5,12 +5,13 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.tobuy.database.entity.ItemEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ItemEntityDao {
 
     @Query("SELECT * FROM item_entity")
-    suspend fun getAll(): List<ItemEntity>
+    fun getAll(): Flow<List<ItemEntity>>
 
     @Insert
     suspend fun insert(items : ItemEntity)

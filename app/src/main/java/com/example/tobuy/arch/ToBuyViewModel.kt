@@ -8,24 +8,30 @@ import com.example.tobuy.database.entity.ItemEntity
 import kotlinx.coroutines.launch
 
 class ToBuyViewModel : ViewModel() {
- private lateinit var repository: ToBuyRepository
+    private lateinit var repository: ToBuyRepository
 
- val itemsLiveData = MutableLiveData<List<ItemEntity>>()
+    val itemsLiveData = MutableLiveData<List<ItemEntity>>()
 
-    fun init(appDatabase: AppDatabase ) {
+    fun init(appDatabase: AppDatabase) {
         repository = ToBuyRepository(appDatabase)
 
         viewModelScope.launch {
-            val items = repository.getItemList()
-            itemsLiveData.postValue(items)
+            repository.getItemList().collect { items ->
+                itemsLiveData.postValue(items)
+
+            }
         }
     }
-      fun insertItem(itemEntity: ItemEntity){
-       viewModelScope.launch {
-           repository.insertItem(itemEntity)
-       }
+
+    fun insertItem(itemEntity: ItemEntity) {
+        viewModelScope.launch {
+            repository.insertItem(itemEntity)
+        }
     }
-     fun deleteItem(itemEntity: ItemEntity){
-        viewModelScope.launch {  repository.deleteItem(itemEntity)
+
+    fun deleteItem(itemEntity: ItemEntity) {
+        viewModelScope.launch {
+            repository.deleteItem(itemEntity)
+        }
     }
-}}
+}

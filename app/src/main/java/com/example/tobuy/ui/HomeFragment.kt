@@ -37,8 +37,8 @@ class HomeFragment : BaseFragment(), itemEntityInterface {
 
 
       override fun onDeleteItemEntity(itemEntity: ItemEntity) {
-            TODO("Not yet implemented")
-      }
+          sharedViewModel.deleteItem(itemEntity)
+          }
 
       override fun onBumpPriority(itemEntity: ItemEntity) {
             TODO("Not yet implemented")
