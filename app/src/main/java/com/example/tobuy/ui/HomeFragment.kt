@@ -35,7 +35,10 @@ class HomeFragment : BaseFragment(), itemEntityInterface {
             }
       }
 
-
+      override fun onResume() {
+            super.onResume()
+            mainActivity.hideKeyboard(requireView())
+      }
       override fun onDeleteItemEntity(itemEntity: ItemEntity) {
           sharedViewModel.deleteItem(itemEntity)
           }
