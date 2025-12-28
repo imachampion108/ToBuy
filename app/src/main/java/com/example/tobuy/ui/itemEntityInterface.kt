@@ -4,6 +4,6 @@ import com.example.tobuy.database.entity.ItemEntity
 
 interface itemEntityInterface {
 
-    fun onDeleteItemEntity(itemEntity: ItemEntity)
+  //  fun onDeleteItemEntity(itemEntity: ItemEntity)
     fun onBumpPriority(itemEntity: ItemEntity)
 }

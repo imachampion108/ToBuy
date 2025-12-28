@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.airbnb.epoxy.EpoxyTouchHelper
 import com.example.tobuy.R
 import com.example.tobuy.database.entity.ItemEntity
 import com.example.tobuy.databinding.FragmentHomeBinding
@@ -33,15 +34,30 @@ class HomeFragment : BaseFragment(), itemEntityInterface {
             sharedViewModel.itemsLiveData.observe(viewLifecycleOwner) { itemEntities ->
                   controller.itemEntityList = itemEntities as ArrayList<ItemEntity>
             }
-      }
+
+            EpoxyTouchHelper.initSwiping(binding.epoxyRecyclerView)
+                  .right()
+                  .withTarget(HomeEpoxyController.ItemEntityEpoxyModel::class.java)
+                  .andCallbacks(object : EpoxyTouchHelper.SwipeCallbacks<HomeEpoxyController.ItemEntityEpoxyModel>(){
+                        override fun onSwipeCompleted(
+                              model: HomeEpoxyController.ItemEntityEpoxyModel?,
+                              itemview: View?,
+                              poition: Int,
+                              direction: Int
+                        ){
+                              val itemThatWasRemoved = model?.itemEntity ?: return
+                              sharedViewModel.deleteItem(itemThatWasRemoved)
+                        }})
+                  }
+
 
       override fun onResume() {
             super.onResume()
             mainActivity.hideKeyboard(requireView())
       }
-      override fun onDeleteItemEntity(itemEntity: ItemEntity) {
-          sharedViewModel.deleteItem(itemEntity)
-          }
+  //    override fun onDeleteItemEntity(itemEntity: ItemEntity) {
+    //      sharedViewModel.deleteItem(itemEntity)
+    //      }
 
       override fun onBumpPriority(itemEntity: ItemEntity) {
             TODO("Not yet implemented")

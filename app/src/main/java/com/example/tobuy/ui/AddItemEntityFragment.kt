@@ -35,7 +35,7 @@ class AddItemEntityFragment() : BaseFragment() {
             complete ->
             if (complete){
                 Toast.makeText(requireActivity(),"Item Saved!", Toast.LENGTH_SHORT).show()
-            binding.titleEditText.text = null
+                binding.titleEditText.text = null
                 binding.titleTextField.requestFocus()
                 mainActivity.showKeyboard()
             binding.descriptionEditText.text = null
