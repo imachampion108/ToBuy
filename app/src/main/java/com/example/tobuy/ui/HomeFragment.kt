@@ -60,7 +60,13 @@ class HomeFragment : BaseFragment(), itemEntityInterface {
     //      }
 
       override fun onBumpPriority(itemEntity: ItemEntity) {
-            TODO("Not yet implemented")
+              val currrentPriority = itemEntity.priority
+              var newPriority = currrentPriority + 1
+             if (newPriority > 3){
+                   newPriority = 1
+             }
+            val updatedPriority = itemEntity.copy(priority = newPriority)
+            sharedViewModel.updateItem(updatedPriority)
       }
 
       override fun onDestroyView() {
