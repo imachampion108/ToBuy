@@ -8,6 +8,7 @@ import androidx.viewbinding.ViewBinding
 import com.airbnb.epoxy.EpoxyController
 import com.example.tobuy.database.entity.ItemEntity
 import com.example.tobuy.databinding.ModelEmptyStateBinding
+import com.example.tobuy.databinding.ModelHeaderItemBinding
 import com.example.tobuy.databinding.ModelItemEntityBinding
 
 class HomeEpoxyController(private val itemEntityInterface: itemEntityInterface) : EpoxyController() {
@@ -38,12 +39,23 @@ class HomeEpoxyController(private val itemEntityInterface: itemEntityInterface) 
             EmptyStateEpoxyModel().id("empty_state").addTo(this)
             return
         }
-
-        itemEntityList.forEach { item ->
+        var currentPriority : Int = -1
+        itemEntityList.sortedByDescending { it.priority }.forEach { item ->
+            if (item.priority != currentPriority){
+                currentPriority = item.priority
+                val text = getHeaderText(currentPriority)
+                HeaderEpoxyModel(text).id(text).addTo(this)
+            }
             ItemEntityEpoxyModel(item,itemEntityInterface).id(item.id).addTo(this)
         }
     }
-
+    private fun getHeaderText(priority: Int): String{
+        return when(priority){
+            1 -> "LOW"
+            2 -> "MEDIUM"
+            else -> "HIGH"
+        }
+    }
     data class ItemEntityEpoxyModel(
             val itemEntity: ItemEntity,
            val itemEntityInterface : itemEntityInterface
@@ -77,5 +89,12 @@ class HomeEpoxyController(private val itemEntityInterface: itemEntityInterface) 
 
          override fun ModelEmptyStateBinding.bind(){}
 
+    }
+    data class HeaderEpoxyModel(
+        val headerText: String
+    ) : ViewBindingKotlinModel<ModelHeaderItemBinding>(R.layout.model_header_item){
+        override fun ModelHeaderItemBinding.bind(){
+            textView.text = headerText
+        }
     }
 }
