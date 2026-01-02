@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?attr/background"
     android:clipChildren="false">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,11 +19,14 @@
             android:layout_marginTop="16dp"
             android:hint="Title"
             app:errorEnabled="true"
+            android:textColorHint="?attr/colorOnBackground"
+            app:hintTextColor="?attr/colorOnBackground"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/titleEditText"
+            android:textColor="?attr/colorOnBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -36,11 +40,14 @@
             android:layout_marginTop="8dp"
             android:hint="Description (Optional)"
             app:layout_constraintStart_toStartOf="parent"
+            android:textColorHint="?attr/colorOnBackground"
+            app:hintTextColor="?attr/colorOnBackground"
             app:layout_constraintTop_toBottomOf="@id/titleTextField">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/descriptionEditText"
                 android:layout_width="match_parent"
+                android:textColor="?attr/colorOnBackground"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -62,21 +69,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Low" />
+                android:text="Low"
+                android:textColor="?attr/colorOnBackground"/>
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/radioButtonMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Medium" />
+                android:text="Medium"
+                android:textColor="?attr/colorOnBackground"/>
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/radioButtonHigh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="High" />
+                android:text="High"
+                android:textColor="?attr/colorOnBackground"/>
 
         </RadioGroup>
 
