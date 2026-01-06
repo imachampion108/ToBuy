@@ -84,6 +84,10 @@ class HomeEpoxyController(private val itemEntityInterface: itemEntityInterface) 
             val color = ContextCompat.getColor(root.context,colorRes)
             priorityTextView.setBackgroundColor(color)
             root.setStrokeColor(ColorStateList.valueOf(color))
+
+            root.setOnClickListener {
+                itemEntityInterface.OnSelectedItem(itemEntity)
+            }
         } }
      class EmptyStateEpoxyModel : ViewBindingKotlinModel<ModelEmptyStateBinding>(R.layout.model_empty_state){
 

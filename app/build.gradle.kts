@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.devtools.ksp")
+    id ("androidx.navigation.safeargs.kotlin")
    // kotlin("kapt")
 
 
@@ -63,6 +64,7 @@ dependencies {
     val nav_version = "2.9.6"
     implementation("androidx.navigation:navigation-fragment:${nav_version}")
     implementation("androidx.navigation:navigation-ui:${nav_version}")
+
 
     //kapt ("androidx.room:room-compiler:$room_version")
 

@@ -6,4 +6,5 @@ interface itemEntityInterface {
 
   //  fun onDeleteItemEntity(itemEntity: ItemEntity)
     fun onBumpPriority(itemEntity: ItemEntity)
+  fun OnSelectedItem(itemEntity: ItemEntity)
 }

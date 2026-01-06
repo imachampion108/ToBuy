@@ -8,7 +8,6 @@ import com.airbnb.epoxy.EpoxyTouchHelper
 import com.example.tobuy.R
 import com.example.tobuy.database.entity.ItemEntity
 import com.example.tobuy.databinding.FragmentHomeBinding
-import java.util.zip.Inflater
 
 class HomeFragment : BaseFragment(), itemEntityInterface {
       var _binding: FragmentHomeBinding? = null
@@ -68,6 +67,12 @@ class HomeFragment : BaseFragment(), itemEntityInterface {
             val updatedPriority = itemEntity.copy(priority = newPriority)
             sharedViewModel.updateItem(updatedPriority)
       }
+
+      override fun OnSelectedItem(itemEntity: ItemEntity) {
+            val navDirection = HomeFragmentDirections.homeFragmentToAddItemEntity(itemEntity.id)
+            navigateViaGraph(navDirection)
+      }
+
 
       override fun onDestroyView() {
             super.onDestroyView()

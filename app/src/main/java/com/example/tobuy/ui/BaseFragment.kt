@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDirections
 import com.example.tobuy.MainActivity
 import com.example.tobuy.arch.ToBuyViewModel
 import com.example.tobuy.database.AppDatabase
@@ -25,6 +26,9 @@ import com.example.tobuy.database.AppDatabase
 
      protected fun navigateViaGraph(actionId : Int){
          mainActivity.navController.navigate(actionId)
+     }
+     protected fun navigateViaGraph(navDirections : NavDirections){
+         mainActivity.navController.navigate(navDirections)
      }
 }
 
