@@ -6,6 +6,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -17,10 +18,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.tobuy.arch.ToBuyViewModel
 import com.example.tobuy.database.AppDatabase
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     lateinit var navController: NavController
@@ -34,12 +37,21 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         navController = navHostFragment.navController
-       // NavigationUI.setupActionBarWithNavController(this,navController)
+        // NavigationUI.setupActionBarWithNavController(this,navController)
 
-        appBarConfiguration = AppBarConfiguration(navController.graph)
+        //set up of top level fragments
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.homeFragment, R.id.profileFragment
+            )
+        )
+        //setup top bar configuration
         setupActionBarWithNavController(navController, appBarConfiguration)
+        // bottom bar navigation
+      setupWithNavController(
+           findViewById<BottomNavigationView>(R.id.bottomNavBar),
+          navHostFragment.navController)
     }
-
         override fun onSupportNavigateUp() : Boolean{
             return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
         }
