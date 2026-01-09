@@ -26,6 +26,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/titleEditText"
+            android:inputType="textCapWords"
             android:textColor="?attr/colorOnBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

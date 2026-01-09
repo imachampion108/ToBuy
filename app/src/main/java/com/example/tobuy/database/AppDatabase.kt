@@ -4,10 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.tobuy.database.dao.CategoryEntityDao
 import com.example.tobuy.database.dao.ItemEntityDao
+import com.example.tobuy.database.entity.CategoryEntity
 import com.example.tobuy.database.entity.ItemEntity
 
-@Database(entities = [ItemEntity::class], version = 1)
+@Database(entities = [ItemEntity::class, CategoryEntity::class], version = 2)
 abstract class AppDatabase : RoomDatabase(){
 
     companion object{
@@ -18,10 +22,18 @@ abstract class AppDatabase : RoomDatabase(){
             return appDatabase!!
             }
 
-            appDatabase = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java,"to-buy-database").build()
+            appDatabase = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java,"to-buy-database")
+                .build()
             return appDatabase!!
         }
     }
+    class Migration1_2() : Migration(1,2) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("CREATE TABLE IF NOT EXISTS `category_entity` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY(`id`)")
+            super.migrate(db)
+        }
+    }
     abstract fun itemEntityDao() : ItemEntityDao
+    abstract fun categoryEntityDao() : CategoryEntityDao
 
 }
