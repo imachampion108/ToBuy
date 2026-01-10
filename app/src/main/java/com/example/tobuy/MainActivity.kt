@@ -1,5 +1,6 @@
 package com.example.tobuy
 
+import android.R.attr.bottom
 import android.app.Activity
 import android.os.Bundle
 import android.view.View
@@ -13,6 +14,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.getSystemService
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -48,10 +51,22 @@ class MainActivity : AppCompatActivity() {
         //setup top bar configuration
         setupActionBarWithNavController(navController, appBarConfiguration)
         // bottom bar navigation
-      setupWithNavController(
-           findViewById<BottomNavigationView>(R.id.bottomNavBar),
-          navHostFragment.navController)
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavBar)
+        setupWithNavController(
+            bottomNavigationView, navController)
+
+        //Add our destination change listener to show/hide bottom nav bar
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            if (appBarConfiguration.topLevelDestinations.contains(destination.id)){
+               bottomNavigationView.isVisible = true
+        }else {
+              bottomNavigationView.isGone = true
+        }
+        }
     }
+
+
         override fun onSupportNavigateUp() : Boolean{
             return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
         }

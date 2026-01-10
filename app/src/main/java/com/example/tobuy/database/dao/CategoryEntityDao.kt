@@ -16,7 +16,7 @@ interface CategoryEntityDao {
     @Query("SELECT * FROM category_entity")
     fun getAll() : Flow<List<CategoryEntity>>
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(categoryEntity: CategoryEntity)
 
     @Update

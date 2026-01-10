@@ -1,10 +1,12 @@
 package com.example.tobuy.ui
 
+import android.R.attr.progress
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import com.example.tobuy.R
@@ -40,6 +42,40 @@ class AddItemEntityFragment() : BaseFragment() {
         binding.saveButton.setOnClickListener {
             saveItemEntityToDatabase()
         }
+
+        binding.quantitySeekBar.setOnSeekBarChangeListener(object :
+        SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(
+                p0: SeekBar?,
+                p1: Int,
+                p2: Boolean
+            ) {
+              val currentText = binding.titleEditText.text.toString().trim()
+                if (currentText.isEmpty()){
+                    return
+                }
+
+                val startIndex = currentText.indexOf("[") - 1
+                val newText = if (startIndex > 0) {
+                    "${currentText.substring(0, startIndex)} [$progress]"
+                } else {
+                    "$currentText [$progress]"
+                }
+
+                val sanitizedText = newText.replace(" [1]", "")
+                binding.titleEditText.setText(sanitizedText)
+                binding.titleEditText.setSelection(sanitizedText.length)
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+                TODO("Not yet implemented")
+            }
+
+        })
         sharedViewModel.transactionCompleteLiveData.observe(viewLifecycleOwner){
             complete ->
             if (complete){
@@ -70,7 +106,7 @@ class AddItemEntityFragment() : BaseFragment() {
             }
 
             binding.saveButton.text = "Update"
-            mainActivity.supportActionBar?.title = "Upadate"
+            mainActivity.supportActionBar?.title = "Update"
         }
     }
 

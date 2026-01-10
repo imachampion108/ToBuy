@@ -23,14 +23,17 @@ abstract class AppDatabase : RoomDatabase(){
             }
 
             appDatabase = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java,"to-buy-database")
+                .addMigrations(Migration1_2())
                 .build()
             return appDatabase!!
         }
     }
-    class Migration1_2() : Migration(1,2) {
-        override fun migrate(db: SupportSQLiteDatabase) {
-            db.execSQL("CREATE TABLE IF NOT EXISTS `category_entity` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY(`id`)")
-            super.migrate(db)
+    class Migration1_2  : Migration(1,2) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("CREATE TABLE IF NOT EXISTS `category_entity` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY(`id`))")
+
+          //  db.execSQL("CREATE TABLE `category_entity` (`id` STRING, `name` STRING," + " PRIMARY KEY(`id`))")
+           // super.migrate(db)
         }
     }
     abstract fun itemEntityDao() : ItemEntityDao
