@@ -107,6 +107,13 @@ class AddItemEntityFragment() : BaseFragment() {
 
             binding.saveButton.text = "Update"
             mainActivity.supportActionBar?.title = "Update"
+
+            if (itemEntity.title.contains("[")){
+                val startIndex = itemEntity.title.indexOf("[") + 1
+                val endIndex = itemEntity.title.indexOf("]")
+                val progress = itemEntity.title.substring(startIndex,endIndex).toInt()
+                binding.quantitySeekBar.progress = progress
+            }
         }
     }
 
