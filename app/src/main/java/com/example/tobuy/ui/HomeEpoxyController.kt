@@ -43,8 +43,7 @@ class HomeEpoxyController(private val itemEntityInterface: itemEntityInterface) 
         itemEntityList.sortedByDescending { it.priority }.forEach { item ->
             if (item.priority != currentPriority){
                 currentPriority = item.priority
-                val text = getHeaderText(currentPriority)
-                HeaderEpoxyModel(text).id(text).addTo(this)
+                addHeaderModel(getHeaderText(currentPriority))
             }
             ItemEntityEpoxyModel(item,itemEntityInterface).id(item.id).addTo(this)
         }
@@ -94,11 +93,5 @@ class HomeEpoxyController(private val itemEntityInterface: itemEntityInterface) 
          override fun ModelEmptyStateBinding.bind(){}
 
     }
-    data class HeaderEpoxyModel(
-        val headerText: String
-    ) : ViewBindingKotlinModel<ModelHeaderItemBinding>(R.layout.model_header_item){
-        override fun ModelHeaderItemBinding.bind(){
-            textView.text = headerText
-        }
-    }
+
 }

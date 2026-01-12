@@ -111,8 +111,11 @@ class AddItemEntityFragment() : BaseFragment() {
             if (itemEntity.title.contains("[")){
                 val startIndex = itemEntity.title.indexOf("[") + 1
                 val endIndex = itemEntity.title.indexOf("]")
-                val progress = itemEntity.title.substring(startIndex,endIndex).toInt()
-                binding.quantitySeekBar.progress = progress
+              try{  val progress = itemEntity.title.substring(startIndex,endIndex).toInt()
+                binding.quantitySeekBar.progress = progress}
+              catch (e: Exception){
+                  //whoops
+              }
             }
         }
     }
