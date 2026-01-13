@@ -1,8 +1,9 @@
 package com.example.tobuy.ui
 
-import android.R.attr.text
+import com.airbnb.epoxy.EpoxyController
+import com.example.tobuy.ui.HomeEpoxyController
 
-fun HomeEpoxyController.addHeaderModel(headerText: String){
-    HeaderEpoxyModel(headerText).id(text).addTo(this)
+fun EpoxyController.addHeaderModel(headerText: String){
+    HeaderEpoxyModel(headerText).id(headerText).addTo(this)
 
 }

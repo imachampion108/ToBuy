@@ -1,6 +1,7 @@
 package com.example.tobuy.arch
 
 import com.example.tobuy.database.AppDatabase
+import com.example.tobuy.database.entity.CategoryEntity
 import com.example.tobuy.database.entity.ItemEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -10,7 +11,7 @@ class ToBuyRepository (private val appDatabase: AppDatabase) {
         appDatabase.itemEntityDao().insert(itemEntity)
     }
     suspend fun updateItem(itemEntity: ItemEntity){
-        appDatabase.itemEntityDao().upadate(itemEntity)
+        appDatabase.itemEntityDao().update(itemEntity)
     }
     suspend fun deleteItem(itemEntity: ItemEntity){
         appDatabase.itemEntityDao().delete(itemEntity)
@@ -18,5 +19,18 @@ class ToBuyRepository (private val appDatabase: AppDatabase) {
 
     fun getItemList() : Flow<List<ItemEntity>> {
         return appDatabase.itemEntityDao().getAll()
+    }
+    suspend fun insertCategory(categoryEntity: CategoryEntity){
+        appDatabase.categoryEntityDao().insert(categoryEntity)
+    }
+    suspend fun updateCategory(categoryEntity: CategoryEntity){
+        appDatabase.categoryEntityDao().update(categoryEntity)
+    }
+    suspend fun deleteCategory(categoryEntity: CategoryEntity){
+        appDatabase.categoryEntityDao().delete(categoryEntity)
+    }
+
+    fun getCategory() : Flow<List<CategoryEntity>> {
+        return appDatabase.categoryEntityDao().getAllCategory()
     }
 }

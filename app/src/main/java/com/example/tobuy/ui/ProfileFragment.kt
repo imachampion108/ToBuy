@@ -4,11 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.tobuy.database.entity.CategoryEntity
 import com.example.tobuy.databinding.FragmentProfileBinding
 
 class ProfileFragment : BaseFragment() {
     private var _binding : FragmentProfileBinding? = null
     private val binding get() = _binding!!
+    private val ProfileEpoxyController = ProfileEpoxyController(
+        onCategoryEmptyStateClicked = ::onCategoryEmptyStateClicked
+    )
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -16,6 +20,19 @@ class ProfileFragment : BaseFragment() {
     ): View? {
         _binding = FragmentProfileBinding.inflate(inflater,container,false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.epoxyRecyclerView.setController(ProfileEpoxyController)
+        sharedViewModel.categoryLiveData.observe(viewLifecycleOwner){ categoryEntities ->
+            ProfileEpoxyController.categories = categoryEntities
+        }
+    }
+
+    private fun onCategoryEmptyStateClicked(){
+
     }
 
     override fun onDestroy() {
