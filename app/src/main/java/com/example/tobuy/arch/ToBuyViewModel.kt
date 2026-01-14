@@ -23,13 +23,13 @@ class ToBuyViewModel : ViewModel() {
                 itemsLiveData.postValue(items)
 
             }
-
+        }
             viewModelScope.launch {
                 repository.getCategory().collect { categoryEntities ->
                     categoryLiveData.postValue(categoryEntities)
                 }
             }
-        }
+
     }
   // region itementity
     fun insertItem(itemEntity: ItemEntity) {

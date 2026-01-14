@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.tobuy.R
 import com.example.tobuy.database.entity.CategoryEntity
 import com.example.tobuy.databinding.FragmentProfileBinding
 
@@ -32,7 +33,7 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun onCategoryEmptyStateClicked(){
-
+        navigateViaGraph(R.id.profileFragment_to_addCategoryFragment)
     }
 
     override fun onDestroy() {
