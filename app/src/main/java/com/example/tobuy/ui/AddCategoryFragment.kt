@@ -35,17 +35,16 @@ class AddCategoryFragment : BaseFragment() {
              saveCategoryToDatabase()
         }
 
-        sharedViewModel.transactionCompleteLiveData.observe(viewLifecycleOwner){ completed ->
-            if (completed){
+        sharedViewModel.transactionCompleteLiveData.observe(viewLifecycleOwner){ event ->
+            event.getContent()?.let{
                 navigateUp()
             }
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        sharedViewModel.transactionCompleteLiveData.postValue(false )
-    }
+   // override fun onPause() {
+     //   super.onPause()
+       // sharedViewModel.transactionCompleteLiveData.postValue(false )
     private fun saveCategoryToDatabase(){
         val CategoryName = binding.categoryNameEditText.text.toString().trim()
         if (CategoryName.isEmpty()){

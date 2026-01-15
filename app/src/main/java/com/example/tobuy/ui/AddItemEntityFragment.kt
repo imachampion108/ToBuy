@@ -77,8 +77,8 @@ class AddItemEntityFragment() : BaseFragment() {
 
         })
         sharedViewModel.transactionCompleteLiveData.observe(viewLifecycleOwner){
-            complete ->
-            if (complete){
+            event ->
+            event.getContent()?.let{
                 if (inEditMode) {
                     navigateUp()
                     return@observe
@@ -120,10 +120,10 @@ class AddItemEntityFragment() : BaseFragment() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        sharedViewModel.transactionCompleteLiveData.postValue(false)
-    }
+ //   override fun onPause() {
+   //     super.onPause()
+     //   sharedViewModel.transactionCompleteLiveData.postValue(false)
+
 
      private fun saveItemEntityToDatabase() {
         val itemTitle = binding.titleEditText.text.toString().trim()
