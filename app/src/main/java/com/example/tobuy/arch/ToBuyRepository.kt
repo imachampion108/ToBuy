@@ -3,6 +3,7 @@ package com.example.tobuy.arch
 import com.example.tobuy.database.AppDatabase
 import com.example.tobuy.database.entity.CategoryEntity
 import com.example.tobuy.database.entity.ItemEntity
+import com.example.tobuy.database.entity.ItemWithCategoryEntity
 import kotlinx.coroutines.flow.Flow
 
 class ToBuyRepository (private val appDatabase: AppDatabase) {
@@ -20,6 +21,10 @@ class ToBuyRepository (private val appDatabase: AppDatabase) {
     fun getItemList() : Flow<List<ItemEntity>> {
         return appDatabase.itemEntityDao().getAll()
     }
+    fun getAllItemWithCategoryEntities() : Flow<List<ItemWithCategoryEntity>>{
+        return appDatabase.itemEntityDao().getAllItemWithCategoryEntity()
+    }
+
     suspend fun insertCategory(categoryEntity: CategoryEntity){
         appDatabase.categoryEntityDao().insert(categoryEntity)
     }
