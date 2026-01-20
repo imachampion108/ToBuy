@@ -38,6 +38,19 @@ class ToBuyViewModel : ViewModel() {
        }
 
     }
+    fun onCategorySelected(){
+
+    }
+
+    data class CategoriesViewState(
+        val isLoading : Boolean = false,
+        val itemsList: List<item> = emptyList()
+    ){
+        data class item(
+            val categoryEntity: CategoryEntity = CategoryEntity(),
+            val isSelected : Boolean = false
+        )
+    }
   // region itementity
     fun insertItem(itemEntity: ItemEntity) {
         viewModelScope.launch {

@@ -21,9 +21,9 @@ class AddItemEntityFragment() : BaseFragment() {
     val binding get() = _binding!!
     private val safeArgs : AddItemEntityFragmentArgs by navArgs()
     private val selectedItemEntity : ItemEntity? by lazy {
-        sharedViewModel.itemsLiveData.value?.find {
-            it.id == safeArgs.selectedItemEntityId
-        }
+        sharedViewModel.itemWithCategoryLiveData.value?.find {
+            it.itemEntity.id == safeArgs.selectedItemEntityId
+        }?.itemEntity
     }
     private var inEditMode : Boolean = false
 
