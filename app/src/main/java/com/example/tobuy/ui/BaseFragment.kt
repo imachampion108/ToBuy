@@ -30,5 +30,6 @@ import com.example.tobuy.database.AppDatabase
      protected fun navigateViaGraph(navDirections : NavDirections){
          mainActivity.navController.navigate(navDirections)
      }
+
 }
 

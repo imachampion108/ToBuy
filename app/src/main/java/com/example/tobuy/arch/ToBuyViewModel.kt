@@ -1,5 +1,6 @@
 package com.example.tobuy.arch
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,6 +17,11 @@ class ToBuyViewModel : ViewModel() {
     val categoryLiveData = MutableLiveData<List<CategoryEntity>>()
     val itemWithCategoryLiveData = MutableLiveData<List<ItemWithCategoryEntity>>()
     val transactionCompleteLiveData = MutableLiveData<Event<Boolean>>()
+
+    private val _categoriesViewStateLiveData = MutableLiveData<CategoriesViewState>()
+    val categoriesViewStateLiveData : LiveData<CategoriesViewState>
+
+        get() = _categoriesViewStateLiveData
 // initialize our flow connectivity to the db for item entities and categories entity
     fun init(appDatabase: AppDatabase) {
         repository = ToBuyRepository(appDatabase)
@@ -38,8 +44,22 @@ class ToBuyViewModel : ViewModel() {
        }
 
     }
-    fun onCategorySelected(){
+    fun onCategorySelected(categoryid : String){
+        val loadingViewState = CategoriesViewState(isLoading = true)
+        _categoriesViewStateLiveData.value = loadingViewState
+         val categories = categoryLiveData.value ?: return
 
+        val viewStateItemList = ArrayList<CategoriesViewState.item>()
+        categories.forEach {
+            viewStateItemList.add(
+                CategoriesViewState.item(
+                    categoryEntity = it,
+                    isSelected = it.id == categoryid
+                )
+            )
+        }
+        val viewState = CategoriesViewState(itemsList = viewStateItemList)
+        _categoriesViewStateLiveData.postValue(viewState)
     }
 
     data class CategoriesViewState(

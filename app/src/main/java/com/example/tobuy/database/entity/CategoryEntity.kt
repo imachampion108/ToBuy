@@ -2,6 +2,7 @@ package com.example.tobuy.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlin.random.Random
 
 @Entity(tableName = "category_entity")
 data class CategoryEntity(
@@ -9,4 +10,8 @@ data class CategoryEntity(
     val name : String = ""
 
 
-)
+) {
+    companion object {
+        const val Default_VAL = "NONE"
+    }
+}

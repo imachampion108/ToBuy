@@ -10,6 +10,7 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import com.example.tobuy.R
+import com.example.tobuy.database.entity.CategoryEntity
 import com.example.tobuy.database.entity.ItemEntity
 import com.example.tobuy.databinding.FragmentAddItemEntityBinding
 import java.util.UUID
@@ -118,7 +119,17 @@ class AddItemEntityFragment() : BaseFragment() {
               }
             }
         }
+       val categoriesViewStateEpoxyController = CategoriesViewStateEpoxyController{categoryId ->
+           sharedViewModel.onCategorySelected(categoryId)
+       }
+        binding.categoriesEpoxyController.setController(categoriesViewStateEpoxyController)
+        sharedViewModel.onCategorySelected(selectedItemEntity?.categoryId ?: CategoryEntity.Default_VAL)
+        sharedViewModel.categoriesViewStateLiveData.observe(viewLifecycleOwner){viewState ->
+            categoriesViewStateEpoxyController.viewState = viewState
+        }
     }
+
+
 
  //   override fun onPause() {
    //     super.onPause()
