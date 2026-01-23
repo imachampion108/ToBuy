@@ -35,7 +35,7 @@ class CategoriesViewStateEpoxyController(
         private val onCategorySelected :(String) -> Unit
     ) : ViewBindingKotlinModel<ModelCategoryItemSelectionBinding>(R.layout.model_category_item_selection){
         override fun ModelCategoryItemSelectionBinding.bind() {
-          textView.text = item.categoryEntity.name
+            textView.text = item.categoryEntity.name
             root.setOnClickListener{
                 onCategorySelected(item.categoryEntity.id)
             }

@@ -13,5 +13,9 @@ data class CategoryEntity(
 ) {
     companion object {
         const val Default_VAL = "NONE"
+
+        fun getDefaultCategory() :CategoryEntity{
+            return CategoryEntity(Default_VAL,"None")
+        }
     }
 }

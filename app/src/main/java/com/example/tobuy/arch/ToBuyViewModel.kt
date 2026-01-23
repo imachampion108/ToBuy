@@ -44,12 +44,17 @@ class ToBuyViewModel : ViewModel() {
        }
 
     }
-    fun onCategorySelected(categoryid : String){
+    fun onCategorySelected(categoryid : String,showLoading : Boolean = false){
+        if (showLoading){
         val loadingViewState = CategoriesViewState(isLoading = true)
-        _categoriesViewStateLiveData.value = loadingViewState
+        _categoriesViewStateLiveData.value = loadingViewState}
          val categories = categoryLiveData.value ?: return
 
         val viewStateItemList = ArrayList<CategoriesViewState.item>()
+        viewStateItemList.add(CategoriesViewState.item(
+          categoryEntity = CategoryEntity.getDefaultCategory(),
+            isSelected = categoryid == CategoryEntity.Default_VAL
+        ))
         categories.forEach {
             viewStateItemList.add(
                 CategoriesViewState.item(
@@ -70,6 +75,10 @@ class ToBuyViewModel : ViewModel() {
             val categoryEntity: CategoryEntity = CategoryEntity(),
             val isSelected : Boolean = false
         )
+
+        fun getSelectedCategoryId(): String{
+            return  itemsList.find { it.isSelected }?.categoryEntity?.id ?: CategoryEntity.Default_VAL
+        }
     }
   // region itementity
     fun insertItem(itemEntity: ItemEntity) {

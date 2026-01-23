@@ -123,7 +123,7 @@ class AddItemEntityFragment() : BaseFragment() {
            sharedViewModel.onCategorySelected(categoryId)
        }
         binding.categoriesEpoxyController.setController(categoriesViewStateEpoxyController)
-        sharedViewModel.onCategorySelected(selectedItemEntity?.categoryId ?: CategoryEntity.Default_VAL)
+        sharedViewModel.onCategorySelected(selectedItemEntity?.categoryId ?: CategoryEntity.Default_VAL, showLoading = true)
         sharedViewModel.categoriesViewStateLiveData.observe(viewLifecycleOwner){viewState ->
             categoriesViewStateEpoxyController.viewState = viewState
         }
@@ -151,12 +151,13 @@ class AddItemEntityFragment() : BaseFragment() {
             R.id.radioButtonHigh -> 3
             else -> 0
         }
-
+         val getCategoryId = sharedViewModel.categoriesViewStateLiveData.value?.getSelectedCategoryId() ?: return
          if (inEditMode){
              val itemEntity = selectedItemEntity!!.copy(
                  title = itemTitle,
                  description = itemDescription,
-                 priority = itemPriority
+                 priority = itemPriority,
+                 categoryId = getCategoryId
              )
              sharedViewModel.updateItem(itemEntity)
              return
@@ -167,7 +168,7 @@ class AddItemEntityFragment() : BaseFragment() {
             description = itemDescription,
             priority = itemPriority,
             createdAt = System.currentTimeMillis(),
-            categoryId = "yet to create"
+            categoryId = getCategoryId
 
         )
         sharedViewModel.insertItem(itemEntity)
