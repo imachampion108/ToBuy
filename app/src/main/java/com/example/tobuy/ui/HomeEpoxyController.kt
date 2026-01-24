@@ -88,6 +88,7 @@ class HomeEpoxyController(private val itemEntityInterface: itemEntityInterface) 
             root.setOnClickListener {
                 itemEntityInterface.OnSelectedItem(itemEntity.itemEntity)
             }
+            categoryConstraintTextView.text = itemEntity.categoryEntity?.name
         } }
      class EmptyStateEpoxyModel : ViewBindingKotlinModel<ModelEmptyStateBinding>(R.layout.model_empty_state){
 

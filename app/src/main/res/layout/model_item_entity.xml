@@ -24,10 +24,23 @@
         android:textColor="?attr/colorOnSurface"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/descriptionTextView"
-        app:layout_constraintEnd_toStartOf="@id/priorityTextView"
+        app:layout_constraintEnd_toStartOf="@id/categoryConstraintTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
         tools:text="Title here" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/categoryConstraintTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:textColor="?attr/colorOnBackground"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/priorityTextView"
+            android:text="Amazon"/>
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/descriptionTextView"
         android:layout_width="0dp"
@@ -51,6 +64,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:background="@color/teal_700" />
+        tools:background="@color/gray_700" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

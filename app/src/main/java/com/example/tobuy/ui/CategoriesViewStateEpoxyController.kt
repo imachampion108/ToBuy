@@ -35,17 +35,19 @@ class CategoriesViewStateEpoxyController(
         private val onCategorySelected :(String) -> Unit
     ) : ViewBindingKotlinModel<ModelCategoryItemSelectionBinding>(R.layout.model_category_item_selection){
         override fun ModelCategoryItemSelectionBinding.bind() {
+            
             textView.text = item.categoryEntity.name
             root.setOnClickListener{
                 onCategorySelected(item.categoryEntity.id)
             }
+
             val colorRes = if(item.isSelected) com.google.android.material.R.attr.colorSecondary else androidx.appcompat.R.attr.colorPrimary
             val color = root.getAttrColor(colorRes)
             textView.setTextColor(color)
             textView.typeface = if (item.isSelected) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
             root.setStrokeColor(ColorStateList.valueOf(color))
-
         }
+
 
     }
 }
