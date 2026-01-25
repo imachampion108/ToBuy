@@ -40,7 +40,7 @@ class ProfileEpoxyController(private val onCategoryEmptyStateClicked : () -> Uni
     data class EmptyButtonEpoxyModel(
         val buttonText : String,
         val onClicked : () -> Unit
-    ) : ViewBindingKotlinModel<ModelEmptyButtonBinding>(R.layout.model_empty_state){
+    ) : ViewBindingKotlinModel<ModelEmptyButtonBinding>(R.layout.model_empty_button){
         override fun ModelEmptyButtonBinding.bind() {
             button.text = buttonText
             button.setOnClickListener { onClicked.invoke() }

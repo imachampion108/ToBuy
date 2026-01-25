@@ -51,16 +51,16 @@ class AddItemEntityFragment() : BaseFragment() {
                 p1: Int,
                 p2: Boolean
             ) {
-              val currentText = binding.titleEditText.text.toString().trim()
+                val currentText = binding.titleEditText.text.toString().trim()
                 if (currentText.isEmpty()){
                     return
                 }
 
                 val startIndex = currentText.indexOf("[") - 1
                 val newText = if (startIndex > 0) {
-                    "${currentText.substring(0, startIndex)} [$progress]"
+                    "${currentText.substring(0, startIndex)} [$p1]"
                 } else {
-                    "$currentText [$progress]"
+                    "$currentText [$p1]"
                 }
 
                 val sanitizedText = newText.replace(" [1]", "")
@@ -69,11 +69,9 @@ class AddItemEntityFragment() : BaseFragment() {
             }
 
             override fun onStartTrackingTouch(p0: SeekBar?) {
-                TODO("Not yet implemented")
             }
 
             override fun onStopTrackingTouch(p0: SeekBar?) {
-                TODO("Not yet implemented")
             }
 
         })
