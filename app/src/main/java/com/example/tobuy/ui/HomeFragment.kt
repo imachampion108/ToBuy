@@ -30,8 +30,8 @@ class HomeFragment : BaseFragment(), itemEntityInterface {
             }
             val controller = HomeEpoxyController(this)
             binding.epoxyRecyclerView.setController(controller)
-            sharedViewModel.itemWithCategoryLiveData.observe(viewLifecycleOwner) { items ->
-                  controller.items = items
+            sharedViewModel.homeViewStateLiveData.observe(viewLifecycleOwner) { viewState ->
+                  controller.viewState = viewState
             }
 
             EpoxyTouchHelper.initSwiping(binding.epoxyRecyclerView)

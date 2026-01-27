@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigationevent.NavigationEventDispatcher
 import androidx.room.Dao
 import com.example.tobuy.database.AppDatabase
 import com.example.tobuy.database.entity.CategoryEntity
@@ -58,22 +59,42 @@ class ToBuyViewModel : ViewModel() {
             HomeViewState.Sort.NONE -> {
                 var currentPriority : Int = -1
                 items.sortedByDescending {
-                    it.itemEntity.priority }.forEach { item ->
-                        if (item.itemEntity.priority != currentPriority){
-                            currentPriority = item.itemEntity.priority
+                    it.itemEntity.priority }.forEach { items ->
+                        if (items.itemEntity.priority != currentPriority){
+                            currentPriority = items.itemEntity.priority
                             val headerItem = HomeViewState.DataItem(
-                                data = getHeaderTextForPriority(currentPriority),
+                                data = getHeaderText(currentPriority),
                                 isHeader = true
                             )
                             dataList.add(headerItem)
                         }
-                            val dataItem = HomeViewState.DataItem(data =item)
-                            dataList.add(dataItem)
+                    val dataItem = HomeViewState.DataItem(data = items)
+                    dataList.add(dataItem)
 
                 }
             }
+            HomeViewState.Sort.CATEGORY -> {}
+            HomeViewState.Sort.NEWEST -> {}
+            HomeViewState.Sort.OLDEST -> {}
+        }
+        _homeViewStateLiveData.postValue(
+            HomeViewState(
+                dataList = dataList,
+                isLoading = true,
+                sort = currentSort
+            )
+        )
+    }
+    private fun getHeaderText(priority: Int): String{
+        return when(priority){
+            1 -> "LOW"
+            2 -> "MEDIUM"
+            else -> "HIGH"
         }
     }
+
+
+
     data class HomeViewState(
         val dataList : List<DataItem<*>> = emptyList(),
         val isLoading: Boolean = false,
