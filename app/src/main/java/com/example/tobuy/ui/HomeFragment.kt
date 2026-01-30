@@ -2,6 +2,9 @@ package com.example.tobuy.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import com.airbnb.epoxy.EpoxyTouchHelper
@@ -12,6 +15,10 @@ import com.example.tobuy.databinding.FragmentHomeBinding
 class HomeFragment : BaseFragment(), itemEntityInterface {
       var _binding: FragmentHomeBinding? = null
       val binding get() = _binding!!
+      override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setHasOptionsMenu(true)
+      }
 
       override fun onCreateView(
             inflater: LayoutInflater,
@@ -49,6 +56,18 @@ class HomeFragment : BaseFragment(), itemEntityInterface {
                         }})
                   }
 
+      override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+            inflater.inflate(R.menu.menu_home_fragment,menu)
+          //  super.onCreateOptionsMenu(menu, inflater)
+      }
+
+      override fun onOptionsItemSelected(item: MenuItem): Boolean {
+            return if (item.itemId == R.id.menuItemSort){
+              true
+            }
+            else{ super.onOptionsItemSelected(item)
+      }}
+
 
       override fun onResume() {
             super.onResume()
@@ -72,6 +91,8 @@ class HomeFragment : BaseFragment(), itemEntityInterface {
             val navDirection = HomeFragmentDirections.homeFragmentToAddItemEntity(itemEntity.id)
             navigateViaGraph(navDirection)
       }
+
+
 
 
       override fun onDestroyView() {
