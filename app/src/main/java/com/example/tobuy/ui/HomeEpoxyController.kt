@@ -19,17 +19,14 @@ class HomeEpoxyController(private val itemEntityInterface: itemEntityInterface) 
      var viewState : ToBuyViewModel.HomeViewState = ToBuyViewModel.HomeViewState(isLoading = true)
        set(value){
             field = value
-                requestModelBuild()
+            requestModelBuild()
             }
-
-
 
     override fun buildModels() {
         if (viewState.isLoading) {
             // loading state
-            // todo loading state
             LoadingEpoxyModel().id("loading_state").addTo(this)
-        return
+             return
         }
         if (viewState.dataList.isEmpty()){
             // empty state

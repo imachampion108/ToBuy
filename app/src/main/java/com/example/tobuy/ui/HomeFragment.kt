@@ -11,6 +11,7 @@ import com.airbnb.epoxy.EpoxyTouchHelper
 import com.example.tobuy.R
 import com.example.tobuy.database.entity.ItemEntity
 import com.example.tobuy.databinding.FragmentHomeBinding
+import com.example.tobuy.ui.bottomSheet.SortOrderBottomSheetFragment
 
 class HomeFragment : BaseFragment(), itemEntityInterface {
       var _binding: FragmentHomeBinding? = null
@@ -39,6 +40,9 @@ class HomeFragment : BaseFragment(), itemEntityInterface {
             binding.epoxyRecyclerView.setController(controller)
             sharedViewModel.homeViewStateLiveData.observe(viewLifecycleOwner) { viewState ->
                   controller.viewState = viewState
+                  binding.epoxyRecyclerView.postDelayed({
+                        binding.epoxyRecyclerView.smoothScrollToPosition(0)
+                  },1000L)
             }
 
             EpoxyTouchHelper.initSwiping(binding.epoxyRecyclerView)
@@ -63,6 +67,7 @@ class HomeFragment : BaseFragment(), itemEntityInterface {
 
       override fun onOptionsItemSelected(item: MenuItem): Boolean {
             return if (item.itemId == R.id.menuItemSort){
+                  SortOrderBottomSheetFragment().show(childFragmentManager,null)
               true
             }
             else{ super.onOptionsItemSelected(item)
@@ -78,8 +83,8 @@ class HomeFragment : BaseFragment(), itemEntityInterface {
     //      }
 
       override fun onBumpPriority(itemEntity: ItemEntity) {
-              val currrentPriority = itemEntity.priority
-              var newPriority = currrentPriority + 1
+              val currentPriority = itemEntity.priority
+              var newPriority = currentPriority + 1
              if (newPriority > 3){
                    newPriority = 1
              }

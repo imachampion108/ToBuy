@@ -20,6 +20,10 @@ class ToBuyViewModel : ViewModel() {
     val itemWithCategoryLiveData = MutableLiveData<List<ItemWithCategoryEntity>>()
     val transactionCompleteLiveData = MutableLiveData<Event<Boolean>>()
     var currentSort : HomeViewState.Sort = HomeViewState.Sort.NONE
+        set(value) {
+            field = value
+            updateHomeViewState(itemWithCategoryLiveData.value!!)
+        }
 
     private val _categoriesViewStateLiveData = MutableLiveData<CategoriesViewState>()
     val categoriesViewStateLiveData : LiveData<CategoriesViewState>
@@ -73,14 +77,55 @@ class ToBuyViewModel : ViewModel() {
 
                 }
             }
-            HomeViewState.Sort.CATEGORY -> {}
-            HomeViewState.Sort.NEWEST -> {}
-            HomeViewState.Sort.OLDEST -> {}
+            HomeViewState.Sort.CATEGORY -> {
+                var currentCategoryId = "no_id"
+                items.sortedBy {
+                    it.categoryEntity?.name ?: CategoryEntity.Default_VAL
+                }.forEach { items ->
+                    if (items.itemEntity.id != currentCategoryId){
+                        currentCategoryId = items.itemEntity.id
+                        val headerItem = HomeViewState.DataItem(
+                            data = items.categoryEntity?.id ?: CategoryEntity.Default_VAL,
+                            isHeader = true
+                        )
+                        dataList.add(headerItem)
+                    }
+                    val data = HomeViewState.DataItem(items)
+                    dataList.add(data)
+                }
+            }
+            HomeViewState.Sort.NEWEST -> {
+                val headerItem = HomeViewState.DataItem(
+                    "Newest",
+                    true
+                )
+                dataList.add(headerItem)
+
+                items.sortedByDescending {
+                    it.itemEntity.createdAt
+                }.forEach { it ->
+                 val dataItem = HomeViewState.DataItem(data = it)
+                    dataList.add(dataItem)
+                }
+            }
+            HomeViewState.Sort.OLDEST -> {
+                val headerItem = HomeViewState.DataItem(
+                    "Oldest",
+                    true
+                )
+                dataList.add(headerItem)
+                items.sortedBy {
+                    it.itemEntity.createdAt
+                }.forEach {
+                    val dataItem = HomeViewState.DataItem(data = it)
+                    dataList.add(dataItem)
+                }
+            }
         }
         _homeViewStateLiveData.postValue(
             HomeViewState(
                 dataList = dataList,
-                isLoading = true,
+                isLoading = false,
                 sort = currentSort
             )
         )
